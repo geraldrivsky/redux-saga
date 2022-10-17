@@ -1,11 +1,14 @@
 import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from './hooks/redux';
 import { CountSlice } from './store/CountSlice';
+import { UsersSlice } from './store/UsersSlice';
 
 const App: FC = () => {
-  const { count } = useAppSelector(state => state.countReducer);
-  const dispatch = useAppDispatch();
+  const { fetchUsers } = UsersSlice.actions;
   const { asyncIncrementCount, asyncDecrementCount } = CountSlice.actions;
+  const dispatch = useAppDispatch();
+  const { count } = useAppSelector(state => state.countReducer);
+  const { users, error } = useAppSelector(state => state.usersReducer);
 
   return (
     <div>
@@ -26,6 +29,21 @@ const App: FC = () => {
       >
         Async Decrement
       </button>
+      <div>
+        <button
+          onClick={() => {
+            dispatch(fetchUsers());
+          }}
+          type='button'
+        >
+          Fetch users
+        </button>
+
+        {users.map(({ id, name }) => (
+          <p key={id}>{name}</p>
+        ))}
+        {error && <p>{error}</p>}
+      </div>
     </div>
   );
 };

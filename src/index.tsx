@@ -1,12 +1,12 @@
-import ReactDOM from 'react-dom/client';
-import './index.scss';
-import { Provider } from 'react-redux';
-import App from './App';
-import { sagaMiddleware, setupStore } from './store/store';
-import { countWatcher } from './saga/CountSaga';
+import ReactDOM from "react-dom/client";
+import "./index.scss";
+import { Provider } from "react-redux";
+import App from "./App";
+import { sagaMiddleware, setupStore } from "./store/store";
+import { rootWatcher } from "./saga";
 
 const store = setupStore();
-sagaMiddleware.run(countWatcher);
+sagaMiddleware.run(rootWatcher);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

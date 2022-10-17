@@ -1,8 +1,10 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import createSagaMiddleware from 'redux-saga';
-import countReducer from './CountSlice';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import createSagaMiddleware from "redux-saga";
+import countReducer from "./CountSlice";
+import usersReducer from "./UsersSlice";
 
-const rootReducer = combineReducers({ countReducer });
+
+const rootReducer = combineReducers({ countReducer, usersReducer });
 export const sagaMiddleware = createSagaMiddleware();
 
 export const setupStore = () =>
